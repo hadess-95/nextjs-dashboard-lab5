@@ -1,5 +1,14 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Acme Dashboard',
+    default: 'Acme Dashboard',
+  },
+  description: 'Financial Dashboard built with Next.js and Supabase.',
+};
 
 export default function RootLayout({
   children,
