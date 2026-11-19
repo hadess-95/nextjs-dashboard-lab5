@@ -6,12 +6,17 @@ import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import postgres from 'postgres';
 
-const sql = postgres(process.env.POSTGRES_URL!, {
-  ssl: 'require',
-  prepare: false,
-  max: 1,
-  idle_timeout: 20,
-});
+const sql = postgres(
+  (process.env.VERCEL === '1'
+    ? process.env.POSTGRES_URL_NON_POOLING
+    : process.env.POSTGRES_URL)!,
+  {
+    ssl: 'require',
+    prepare: false,
+    max: 1,
+    idle_timeout: 20,
+  }
+);
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
